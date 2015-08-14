@@ -1,4 +1,4 @@
-# Unix Command sample
+# sample
 
 ```
 sample [-f 0.1] [-p 10] [-n 10] [file ...]
