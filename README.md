@@ -6,6 +6,8 @@ sample [-f 0.1] [-p 10] [-n 10] [file ...]
 
 Sample a file at random.
 
+Note: only the `-f` option is supported.
+
 In fraction mode (the default, or when `-f` or `-p` is used)
 each line of the input is copied to the output with probability
 *f*. Thus *f* is the expected fraction of the input lines that
