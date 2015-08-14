@@ -2,9 +2,12 @@ package main
 
 import (
 	"bufio"
+	cryptorand "crypto/rand"
 	"flag"
 	"fmt"
 	"io"
+	"log"
+	"math/big"
 	"math/rand"
 	"os"
 )
@@ -19,6 +22,18 @@ func main() {
 	if len(args) == 0 {
 		args = []string{"-"}
 	}
+
+	// Will be 2**64. Start with 2**32 and square it.
+	two64 := big.NewInt(1 << 32)
+	two64.Mul(two64, two64)
+
+	seed, err := cryptorand.Int(cryptorand.Reader, two64)
+	if err != nil {
+		log.Println("Error", err)
+	}
+	offset := big.NewInt(-(1 << 63))
+	rand.Seed(seed.Add(seed, offset).Int64())
+
 	for _, f := range args {
 		func() {
 			var err error
